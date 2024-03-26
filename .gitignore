@@ -9,8 +9,7 @@
 /coverage
 
 # next.js
-/.next/
-.next/
+/.next
 /out/
 .next/cache/webpack/client-production/0.pack
 
