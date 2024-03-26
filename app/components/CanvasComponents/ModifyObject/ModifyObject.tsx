@@ -1,5 +1,5 @@
 "use client";
-import styles from "../../../test/canvas.module.css";
+import styles from "../../../page.module.css";
 import CanvasSidebar from "../CanvasSidebar/CanvasSidebar";
 
 export default function ModifyObject({
