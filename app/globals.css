@@ -1,0 +1,298 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap");
+
+@font-face {
+  font-family: "SF-Pro";
+  src: url("../public/static/fonts/SF-Pro.ttf");
+}
+
+/* math */
+@font-face {
+  font-family: "Noto Sans Math";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/notosansmath/v15/7Aump_cpkSecTWaHRlH2hyV5UEl981wa8-W1.woff2)
+    format("woff2");
+  unicode-range: U+0302-0303, U+0305, U+0307-0308, U+0330, U+0391-03A1,
+    U+03A3-03A9, U+03B1-03C9, U+03D1, U+03D5-03D6, U+03F0-03F1, U+03F4-03F5,
+    U+2034-2037, U+2057, U+20D0-20DC, U+20E1, U+20E5-20EF, U+2102, U+210A-210E,
+    U+2110-2112, U+2115, U+2119-211D, U+2124, U+2128, U+212C-212D, U+212F-2131,
+    U+2133-2138, U+213C-2140, U+2145-2149, U+2190, U+2192, U+2194-21AE,
+    U+21B0-21E5, U+21F1-21F2, U+21F4-2211, U+2213-2214, U+2216-22FF, U+2308-230B,
+    U+2310, U+2319, U+231C-2321, U+2336-237A, U+237C, U+2395, U+239B-23B6,
+    U+23D0, U+23DC-23E1, U+2474-2475, U+25AF, U+25B3, U+25B7, U+25BD, U+25C1,
+    U+25CA, U+25CC, U+25FB, U+266D-266F, U+27C0-27FF, U+2900-2AFF, U+2B0E-2B11,
+    U+2B30-2B4C, U+2BFE, U+FF5B, U+FF5D, U+1D400-1D7FF, U+1EE00-1EEFF,
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --black: #222;
+  --white: #fff;
+  --lesswhite: #eee;
+  --lightgray: #bbb;
+  --gray: #777;
+  --point: #f25c54;
+  --lesspoint: #f25c5474;
+  --littlepoint: #f25c5427;
+  --nopoint: #f25c5416;
+  --brown: #271f1b;
+  --brown: #100504;
+  --header: white;
+  --back: rgba(235, 234, 232, 0.346);
+  --main: white;
+  --mainTxt: white;
+}
+
+*,
+:after,
+:before {
+  font-family: "San Francisco, SF Pro, SF-Pro, Noto Sans, Noto Sans Math, Roboto, system-ui,-apple-system,BlinkMacSystemFont,SFNSText-Regular,sans-serif, Arial";
+  box-sizing: border-box;
+}
+:after,
+:before {
+  --tw-content: "";
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  font-family: "Noto Sans, Noto Sans Math,  system-ui,-apple-system,BlinkMacSystemFont,SFNSText-Regular,sans-serif, Arial";
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+}
+body {
+  font-family: "Noto Sans, Noto Sans Math,  system-ui,-apple-system,BlinkMacSystemFont,SFNSText-Regular,sans-serif, Arial";
+  -ms-overflow-style: none;
+  margin: 0;
+}
+html,
+body,
+main {
+  background-color: white;
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+b,
+strong {
+  font-weight: bolder;
+}
+em {
+  font-style: normal;
+  font-weight: 600;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: "Roboto", "Noto Sans KR", "Noto Serif KR", Arial, Noto Sans,
+    sans-serif;
+  font-size: 1em;
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub {
+  bottom: -0.25em;
+}
+sup {
+  top: -0.5em;
+}
+table {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+/* li태그 점 빼기 */
+li {
+  list-style: none;
+}
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 2px 5px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+button:focus,
+input:focus,
+optgroup:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button,
+select {
+  text-transform: none;
+}
+select,
+input {
+  border: 1px solid #bbb;
+  padding: 0K 5px;
+}
+blockquote,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+pre {
+  margin: 0;
+}
+fieldset {
+  margin: 0;
+}
+fieldset,
+legend {
+  padding: 0;
+}
+menu,
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+textarea {
+  resize: vertical;
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #9ca3af;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+  font-size: 14px;
+}
+[role="button"],
+button {
+  cursor: pointer;
+}
+:disabled {
+  cursor: default;
+}
+audio,
+canvas,
+embed,
+iframe,
+img,
+object,
+svg,
+video {
+  display: block;
+  vertical-align: middle;
+}
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+[hidden] {
+  display: none;
+}
+
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  /* min-height: 100vh; */
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-left: 75px;
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    margin-left: 0;
+  }
+}
+
+.mainTitle {
+  font-size: 18px;
+  letter-spacing: -0.4px;
+  padding: 30px 0 0 50px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+svg {
+  display: inline-block;
+  vertical-align: -0.0125em;
+}
+.mainTitle .icon {
+  width: 20px;
+  height: 20px;
+}
+.tooltip-inner {
+  max-width: 50vw !important;
+  text-align: start !important;
+  padding: 1rem !important;
+}

@@ -1,0 +1,15 @@
+.tooltipInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.infoBtn .icon {
+  width: 17px;
+  height: 17px;
+  fill: #555;
+}
+.infoBtn {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}

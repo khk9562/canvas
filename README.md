@@ -1,2 +1,11 @@
-# canvas
-Next.js 13 + Typescript + Fabric.js 기반의 Canvas
+![header](https://capsule-render.vercel.app/api?type=venom&color=f25c54&height=250&section=header&text=루루봇&fontSize=90&fontColor=000)
+
+![Next.js](https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=for-the-badge)
+![typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+# 캔버스
+
+### 실행명령어: npm run dev
+
+### Node Version: 20.11.1
