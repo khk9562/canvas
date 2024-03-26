@@ -94,7 +94,7 @@
 .plusNav {
   border-radius: 10px;
   position: absolute;
-  left: 120px;
+  left: 8px;
   top: 65px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -108,31 +108,15 @@
   font-size: 9px;
   line-height: 1;
 }
-.plusNavBtn {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  left: 80px;
-  top: 75px;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 50;
-}
-.plusNavBtn .icon {
-  width: 20px;
-  height: 20px;
-  margin: 3px;
-}
 
 .sideNav {
   z-index: 15;
-  background-color: var(--brown);
+  background-color: #333;
   position: relative;
   overflow-y: hidden;
   position: absolute;
   right: 5px;
-  top: 103px;
+  top: 65px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -140,23 +124,6 @@
   flex-direction: column;
   gap: 3px;
   padding: 3px 0;
-}
-.sideNavBtn {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  top: 65px;
-  right: 15px;
-  border-radius: 5px;
-  background-color: var(--brown);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 15;
-}
-.sideNavBtn .icon {
-  margin: 3px;
-  width: 20px;
-  height: 20px;
-  fill: white;
 }
 
 .addStButton .icon {

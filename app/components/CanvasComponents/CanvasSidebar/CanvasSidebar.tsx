@@ -12,21 +12,7 @@ export default function CanvasSidebar(props: any) {
   const { kind, children, title, closeOpenState } = props;
 
   return (
-    <div
-      className={`${styles.box} ${kind == "modify" && styles.modifybox}`}
-      // style={
-      //   kind == "modify"
-      //     ? {
-      //         top: "auto",
-      //         bottom: "0",
-      //         left: "80px",
-      //         right: "auto",
-      //         height: "fit-content",
-      //         zIndex: "55",
-      //       }
-      //     : {}
-      // }
-    >
+    <div className={`${styles.box} ${kind == "modify" && styles.modifybox}`}>
       <h6 className={styles.boxTit}>{title}</h6>
       <button
         type="button"
@@ -34,16 +20,6 @@ export default function CanvasSidebar(props: any) {
         className={`${styles.closeOpenState} ${
           kind == "modify" && styles.modifyClose
         }`}
-        // style={
-        //   kind == "modify"
-        //     ? {
-        //         right: "-35px",
-        //         left: "auto",
-        //         borderRight: "inherit",
-        //         borderLeft: "0 none",
-        //       }
-        //     : {}
-        // }
       >
         <SvgClose className={styles.icon} />
       </button>

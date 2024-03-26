@@ -22,7 +22,7 @@ export default function CanvasNotice({ open, refName }: any) {
                 </>
               ) : (
                 <span>
-                  {`이미지를 캔버스로 드래그 앤 드롭
+                  {`이미지를 캔버스로 드래그앤드롭
               `}
                 </span>
               )}

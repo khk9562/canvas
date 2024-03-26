@@ -306,305 +306,6 @@ export default function MakeCanvas() {
   const [activeType, setActiveType] = useState<string>("");
   const [showModify, setShowModify] = useState<boolean>(false);
 
-  // Fetch api
-  const getLiveIdAll = async () => {
-    try {
-      const settings: RequestInit = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: session,
-        },
-      };
-      const fetchResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_ROOROO_API as string}/live/sticker/list`,
-        settings
-      );
-      const status = fetchResponse.status;
-      if (status == 401 && session) {
-        setShowSessionExModal(true);
-        removeSession();
-      }
-
-      const data = await fetchResponse.json();
-      if (data?.ok) {
-        const liveIds = data.data.map((item: any) => item.live_id);
-        const uniqueLiveIds = Array.from(new Set(liveIds));
-        setLiveIds(uniqueLiveIds);
-      }
-    } catch (e) {
-      console.log("전체 라이브아이디 가져오기 오류", e);
-    }
-  };
-  const getStickerByLiveID = async (live_id: number) => {
-    try {
-      const settings: RequestInit = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: session,
-        },
-        body: JSON.stringify({
-          live_id: live_id,
-          page: 1,
-          limit: 100000,
-        }),
-      };
-
-      const fetchResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_ROOROO_API as string}/sticker/getByLiveId`,
-        settings
-      );
-      const data = await fetchResponse.json();
-      if (data.ok) {
-        const reals = data?.data.map((item: any) => ({
-          ...item,
-          sticker: `/sticker/${item.sticker}.png`,
-          txt: "스푼",
-        }));
-        setAllStickers((prevStickers) => [...prevStickers, ...reals]);
-      }
-    } catch (e) {
-      console.error("getStickerByLiveID", e);
-    }
-  };
-  const getLikesByLiveId = async (live_id: number) => {
-    try {
-      const settings: RequestInit = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: session,
-        },
-        body: JSON.stringify({
-          live_id: live_id,
-          page: 1,
-          limit: 100000,
-        }),
-      };
-      const fetchResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_ROOROO_API as string}/like/getByLiveId`,
-        settings
-      );
-      const data = await fetchResponse.json();
-      if (data?.ok) {
-        const nonEmptyStickerItems = data.data.filter(
-          (item: any) => item.sticker !== ""
-        );
-
-        const reals = nonEmptyStickerItems.map((item: any) => ({
-          ...item,
-          sticker: `/sticker/${item.sticker}.png`,
-          txt: "개",
-        }));
-
-        setAllStickers((prevStickers) => [...prevStickers, ...reals]);
-      }
-    } catch (e) {
-      console.error("getLikesByLiveId", e);
-    }
-  };
-  const getStickerCate = async () => {
-    try {
-      getVersion();
-
-      const settings: RequestInit = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: session,
-        },
-        body: JSON.stringify({
-          page: "1",
-          limit: "30",
-        }),
-      };
-      const fetchResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_ROOROO_API as string}/sticker/category/get`,
-        settings
-      );
-
-      const data = await fetchResponse.json();
-      if (data?.ok) {
-        setStickerCate(data?.data);
-        setActiveStickerTab(data?.data[0].name);
-        getStickerList(data?.data[0].name);
-      }
-    } catch (e) {
-      console.error("getStickerCate", e);
-    }
-  };
-  const getStickerList = async (activeStickerTab: string) => {
-    try {
-      getVersion();
-
-      const settings: RequestInit = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: session,
-        },
-        body: JSON.stringify({
-          cate_id: activeStickerTab,
-          version: newVersion,
-          page: "1",
-          limit: "300",
-        }),
-      };
-
-      const fetchResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_ROOROO_API as string}/sticker/list/get`,
-        settings
-      );
-
-      const data = await fetchResponse.json();
-      if (data?.ok) {
-        setMoreStickers(data?.data);
-      }
-    } catch (e) {
-      console.error("getStickerList", e);
-    }
-  };
-  // Canvas 저장목록 가져오기
-  const getCanvasList = async (AccessToken: string) => {
-    const settings: RequestInit = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        AccessToken: AccessToken,
-      }),
-    };
-    try {
-      const fetchResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_CANVAS_API as string}/canvas/getlist`,
-        settings
-      );
-      const data = await fetchResponse.json();
-      // console.log("getCanvasList", data);
-      if (data?.kind == "OK") {
-        setCanvasList(data?.data);
-      }
-    } catch (e) {
-      console.error("getCanvasList Error", e);
-    }
-  };
-  // 캔버스 중간 저장
-  const saveCanvasState = async (AccessToken: string) => {
-    const canvas = canvasRef.current;
-
-    if (!canvas) return;
-
-    const canvasState = JSON.stringify(canvas.toJSON());
-    const stateToSave = {
-      canvasState,
-      imagesUrls,
-      liveId: selectedLiveId,
-    };
-
-    const title =
-      selectedCanvasTIt && selectedCanvasTIt !== "제목없음"
-        ? selectedCanvasTIt
-        : window.prompt("캔버스의 제목을 입력해주세요.") || "제목없음";
-
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_CANVAS_API as string}/canvas/save`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            imageCode: JSON.stringify(stateToSave),
-            title,
-            AccessToken: AccessToken,
-          }),
-        }
-      );
-      const data = await response.json();
-      await getCanvasList(AccessToken);
-    } catch (error) {
-      console.error("saveCanvasState", error);
-    }
-  };
-  //   저장한 캔버스 상태 불러오기
-  const loadCanvasState = async (
-    selectedCnvasId: string,
-    AccessToken: string
-  ) => {
-    const canvas = canvasRef.current;
-
-    if (!canvas) return;
-    deleteAll();
-    setImagesUrls([]);
-
-    // 선택 캔버스 가져오기
-    const settings: RequestInit = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        canvasID: Number(selectedCnvasId),
-        AccessToken: AccessToken,
-      }),
-    };
-
-    try {
-      const fetchResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_CANVAS_API as string}/canvas/get`,
-        settings
-      );
-      const data = await fetchResponse.json();
-      const selectCanvasData = data?.data?.imageCode.replace(/^"|"$/g, "");
-      let savedObj: {
-        canvasState: string;
-        imagesUrls: string[];
-        liveId?: number;
-      } | null = null;
-      savedObj = JSON.parse(selectCanvasData);
-      let canvasJson: any | null = null;
-
-      if (data?.kind == "OK") {
-        setSelectedCanvasTit(data?.data.title);
-        canvasJson = JSON.parse(savedObj?.canvasState || "");
-
-        fabric.util.enlivenObjects(
-          canvasJson.objects,
-          (objects: any) => {
-            objects.forEach((obj: any) => {
-              canvas.add(obj);
-            });
-
-            setImagesUrls(savedObj?.imagesUrls || []);
-
-            if (savedObj?.liveId !== undefined || 0)
-              setSelectedLiveId(savedObj?.liveId || 0);
-
-            canvas.renderAll();
-          },
-          "fabric"
-        );
-      }
-    } catch (e) {
-      console.error("loadCanvasState", e);
-    }
-  };
-  //   저장한 캔버스 상태 삭제하기
-  const deleteSavedCanvas = () => {
-    const selectedState = (
-      document.getElementById("selectedState") as HTMLSelectElement
-    )?.value;
-
-    if (!selectedState) return;
-
-    localStorage.removeItem(selectedState);
-    const saveds = Object.keys(localStorage);
-    setSavedNames(saveds);
-  };
-
   ////// 함수
 
   const onCanvasReady = (canvas: fabric.Canvas) => {
@@ -1547,8 +1248,6 @@ export default function MakeCanvas() {
     if (canvasRef.current) {
       setInitialCanvas(canvasRef.current);
     }
-    getLiveIdAll();
-    getStickerCate();
 
     const saveds = Object.keys(localStorage).filter((key) =>
       key.startsWith("canvas-")
@@ -1561,15 +1260,6 @@ export default function MakeCanvas() {
       window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
-
-  useEffect(() => {
-    if (selectedLiveId != 0) {
-      getStickerByLiveID(selectedLiveId);
-      getLikesByLiveId(selectedLiveId);
-    }
-    setSortVal("");
-    setSortFixVal("");
-  }, [selectedLiveId]);
 
   useEffect(() => {
     if (isButtonActive) {
@@ -1755,10 +1445,6 @@ export default function MakeCanvas() {
   }, [isCropMode, selectedImage, cropZone]);
 
   useEffect(() => {
-    getStickerList(activeStickerTab);
-  }, [activeStickerTab]);
-
-  useEffect(() => {
     if (lottieRef.current) {
       if (lottieRef.current?.animationItem) {
         const handleFrame = () => {
@@ -1930,65 +1616,6 @@ export default function MakeCanvas() {
               }
             />
           </button>
-          <select
-            className={styles.selectedLiveId}
-            name="live_id"
-            id="live_id"
-            value={selectedLiveId}
-            style={{
-              backgroundColor: "var(--littlepoint)",
-              fontWeight: "600",
-              border: "2px solid var(--point)",
-            }}
-            required
-            onChange={(e) => {
-              setSelectedLiveId(parseInt(e.target.value));
-              setStickers([]);
-              setAllStickers([]);
-            }}
-          >
-            <option value={0}>라이브 아이디 선택</option>
-            {liveIds.map((item: any, index: number) => (
-              <option key={`${item}-${index}`} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-
-          {/* <select
-            name="selectedState"
-            id="selectedState"
-            className={styles.selectedState}
-            onChange={(e) => {
-              setSelectedCanvasId(e.target.value);
-              loadCanvasState(
-                e.target.value,
-                "15dTadf2TT16i7dk9d6sjdf9s181T6FDOKAkdo86"
-              );
-            }}
-          >
-            <option value="none">불러올 캔버스 선택</option>
-            {canvasList?.map((item: any, index: number) => (
-              <option key={`${item.id}-${index}`} value={item.id}>
-                {item.title} &nbsp; {item.datetime.split("T")[0]}
-              </option>
-            ))}
-          </select>
-
-          <button
-            type="button"
-            onClick={() =>
-              saveCanvasState("15dTadf2TT16i7dk9d6sjdf9s181T6FDOKAkdo86")
-            }
-          >
-            <SvgSave className={styles.icon} />
-            <span>캔버스저장</span>
-          </button>
-
-          <button type="button" onClick={deleteSavedCanvas}>
-            <SvgTrash className={styles.icon} />
-            <span>캔버스삭제</span>
-          </button> */}
 
           <div className={styles.zoomBox}>
             <div className={styles.zoomInnerBox}>
@@ -2026,127 +1653,75 @@ export default function MakeCanvas() {
           </NavBtn>
         </nav>
 
-        <>
-          <NavBtn
-            fn={() => setOpenPlusNav(!openPlusNav)}
-            classname={styles.plusNavBtn}
-          >
-            {openPlusNav ? (
-              <SvgBoxing className={styles.icon} />
-            ) : (
-              <SvgUnBoxing className={styles.icon} />
-            )}
-          </NavBtn>
-          {openPlusNav && (
-            <nav className={styles.plusNav}>
-              {showGroupBtn && (
-                <NavBtn content="그룹" fn={groupObjectsInCanvas}>
-                  <SvgGroup className={styles.icon} />
-                </NavBtn>
-              )}
-              {showUnGroupBtn && (
-                <NavBtn content="그룹 해제" fn={unGroupObjectsInCanvas}>
-                  <SvgUnGroup className={styles.icon} />
-                </NavBtn>
-              )}
-              {isCropMode && (
-                <NavBtn content="크롭 취소" fn={() => setIsCropMode(false)}>
-                  <SvgClose className={styles.icon} />
-                </NavBtn>
-              )}
-              {showCropBtn && !isCropMode && (
-                <NavBtn
-                  content="크롭"
-                  fn={() => {
-                    handleCropMode();
-                  }}
-                >
-                  <SvgCrop className={styles.icon} />
-                </NavBtn>
-              )}
-              <NavBtn content="앞" fn={bringSelectedForward}>
-                <SvgUp className={styles.icon} />
-              </NavBtn>
-              <NavBtn content="뒤" fn={sendSelectedBack}>
-                <SvgDown className={styles.icon} />
-              </NavBtn>
-              <NavBtn content="맨앞" fn={bringToFront}>
-                <SvgForward className={styles.icon} />
-              </NavBtn>
-              <NavBtn content="맨뒤" fn={sendToBack}>
-                <SvgBackWard className={styles.icon} />
-              </NavBtn>
-              <NavBtn content="선택해제" fn={deSelect}>
-                <SvgDeselect className={styles.icon} />
-              </NavBtn>
-              <NavBtn content="전부삭제" fn={deleteAll}>
-                <SvgTrash className={styles.icon} />
-              </NavBtn>
-              <NavBtn content="선택삭제" fn={deleteSelected}>
-                <SvgSelectDel className={styles.icon} />
-              </NavBtn>
-              <NavBtn content="좌우반전" fn={filpX}>
-                <SvgFlipX className={styles.icon} />
-              </NavBtn>
-              <NavBtn content="고정" fn={handleFix}>
-                <SvgPin className={styles.icon} />
-              </NavBtn>
-            </nav>
+        <nav className={styles.plusNav}>
+          {showGroupBtn && (
+            <NavBtn content="그룹" fn={groupObjectsInCanvas}>
+              <SvgGroup className={styles.icon} />
+            </NavBtn>
           )}
-        </>
+          {showUnGroupBtn && (
+            <NavBtn content="그룹 해제" fn={unGroupObjectsInCanvas}>
+              <SvgUnGroup className={styles.icon} />
+            </NavBtn>
+          )}
+          {isCropMode && (
+            <NavBtn content="크롭 취소" fn={() => setIsCropMode(false)}>
+              <SvgClose className={styles.icon} />
+            </NavBtn>
+          )}
+          {showCropBtn && !isCropMode && (
+            <NavBtn
+              content="크롭"
+              fn={() => {
+                handleCropMode();
+              }}
+            >
+              <SvgCrop className={styles.icon} />
+            </NavBtn>
+          )}
+          <NavBtn content="앞" fn={bringSelectedForward}>
+            <SvgUp className={styles.icon} />
+          </NavBtn>
+          <NavBtn content="뒤" fn={sendSelectedBack}>
+            <SvgDown className={styles.icon} />
+          </NavBtn>
+          <NavBtn content="맨앞" fn={bringToFront}>
+            <SvgForward className={styles.icon} />
+          </NavBtn>
+          <NavBtn content="맨뒤" fn={sendToBack}>
+            <SvgBackWard className={styles.icon} />
+          </NavBtn>
+          <NavBtn content="선택해제" fn={deSelect}>
+            <SvgDeselect className={styles.icon} />
+          </NavBtn>
+          <NavBtn content="전부삭제" fn={deleteAll}>
+            <SvgTrash className={styles.icon} />
+          </NavBtn>
+          <NavBtn content="선택삭제" fn={deleteSelected}>
+            <SvgSelectDel className={styles.icon} />
+          </NavBtn>
+          <NavBtn content="좌우반전" fn={filpX}>
+            <SvgFlipX className={styles.icon} />
+          </NavBtn>
+          <NavBtn content="고정" fn={handleFix}>
+            <SvgPin className={styles.icon} />
+          </NavBtn>
+        </nav>
 
-        <>
-          {openSideNav && (
-            <nav className={styles.sideNav}>
-              <NavBtn fn={() => toggleState("openResize")} content="캔버스">
-                <SvgResize className={styles.icon} />
-              </NavBtn>
-              <NavBtn fn={() => toggleState("openText")} content="텍스트">
-                <SvgText className={styles.icon} />
-              </NavBtn>
-              <NavBtn fn={() => toggleState("openFigures")} content="도형">
-                <SvgShape className={styles.icon} />
-              </NavBtn>
-              <NavBtn fn={() => toggleState("openPictures")} content="사진">
-                <SvgImage className={styles.icon} />
-              </NavBtn>
-              <NavBtn fn={() => toggleState("openSticker")} content="스티커">
-                <SvgStar className={styles.icon} />
-              </NavBtn>
-              <NavBtn
-                fn={() => {
-                  selectedLiveId
-                    ? toggleState("openSpoonStickers")
-                    : setShowLiveIdToast(true);
-                }}
-                content="후원스티커"
-              >
-                <SvgStamp className={styles.icon} />
-              </NavBtn>
-              <NavBtn
-                content="스티커추가"
-                fn={() => {
-                  if (fixTxts.length == 0) {
-                    setOpenFixModal(true);
-                  }
-                  toggleState("openFix");
-                }}
-              >
-                <SvgPlus className={styles.icon} />
-              </NavBtn>
-            </nav>
-          )}
-          <NavBtn
-            classname={styles.sideNavBtn}
-            fn={() => setOpenSideNav(!openSideNav)}
-          >
-            {openSideNav ? (
-              <SvgBoxing className={styles.icon} />
-            ) : (
-              <SvgUnBoxing className={styles.icon} />
-            )}
+        <nav className={styles.sideNav}>
+          <NavBtn fn={() => toggleState("openResize")} content="캔버스">
+            <SvgResize className={styles.icon} />
           </NavBtn>
-        </>
+          <NavBtn fn={() => toggleState("openText")} content="텍스트">
+            <SvgText className={styles.icon} />
+          </NavBtn>
+          <NavBtn fn={() => toggleState("openFigures")} content="도형">
+            <SvgShape className={styles.icon} />
+          </NavBtn>
+          <NavBtn fn={() => toggleState("openPictures")} content="사진">
+            <SvgImage className={styles.icon} />
+          </NavBtn>
+        </nav>
       </>
 
       {/* 사이드 추가 네비 */}
@@ -2612,6 +2187,10 @@ export default function MakeCanvas() {
                         alt={`Image ${index}`}
                         width={180}
                         height={180}
+                        style={{
+                          objectFit: "contain",
+                          objectPosition: "top center",
+                        }}
                       />
                       <button
                         type="button"
@@ -3174,16 +2753,6 @@ export default function MakeCanvas() {
 
       {/* 토스트 알림들 */}
       <>
-        <ToastInfo
-          showSt={showLiveIdToast}
-          setShowSt={setShowLiveIdToast}
-          content="라이브 아이디를 먼저 선택해주세요!"
-        />
-        <ToastInfo
-          showSt={showLottieErr}
-          setShowSt={setShowLottieErr}
-          content="애니메이션 이미지 가져오기에 실패하였습니다!"
-        />
         <ToastInfo
           showSt={alertImgAllowed}
           setShowSt={setAlertImgAllowed}
