@@ -8,7 +8,6 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import Head from "next/head";
-import Sidebar from "./components/Layouts/Sidebar/Sidebar";
 import "../public/static/fonts/style.css";
 
 declare global {
@@ -53,7 +52,6 @@ export default function RootLayout({
 
       <body>
         <PlayListProvider>
-          {mounted && <Sidebar />}
           <main>{children}</main>
         </PlayListProvider>
       </body>

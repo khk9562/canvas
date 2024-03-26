@@ -31,52 +31,24 @@
 }
 
 :root {
-  --black: #222;
   --white: #fff;
   --lesswhite: #eee;
-  --lightgray: #bbb;
-  --gray: #777;
   --point: #f25c54;
   --lesspoint: #f25c5474;
   --littlepoint: #f25c5427;
   --nopoint: #f25c5416;
-  --brown: #271f1b;
-  --brown: #100504;
-  --header: white;
-  --back: rgba(235, 234, 232, 0.346);
-  --main: white;
-  --mainTxt: white;
 }
 
-*,
-:after,
-:before {
-  font-family: "San Francisco, SF Pro, SF-Pro, Noto Sans, Noto Sans Math, Roboto, system-ui,-apple-system,BlinkMacSystemFont,SFNSText-Regular,sans-serif, Arial";
-  box-sizing: border-box;
-}
-:after,
-:before {
-  --tw-content: "";
-}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -ms-user-select: none;
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
 }
 html {
-  -webkit-text-size-adjust: 100%;
   font-family: "Noto Sans, Noto Sans Math,  system-ui,-apple-system,BlinkMacSystemFont,SFNSText-Regular,sans-serif, Arial";
-  font-feature-settings: normal;
-  font-variation-settings: normal;
 }
 body {
   font-family: "Noto Sans, Noto Sans Math,  system-ui,-apple-system,BlinkMacSystemFont,SFNSText-Regular,sans-serif, Arial";
-  -ms-overflow-style: none;
   margin: 0;
 }
 html,
@@ -95,38 +67,6 @@ h6 {
   font-weight: inherit;
   margin: 0;
 }
-b,
-strong {
-  font-weight: bolder;
-}
-em {
-  font-style: normal;
-  font-weight: 600;
-}
-code,
-kbd,
-pre,
-samp {
-  font-family: "Roboto", "Noto Sans KR", "Noto Serif KR", Arial, Noto Sans,
-    sans-serif;
-  font-size: 1em;
-}
-small {
-  font-size: 80%;
-}
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-sub {
-  bottom: -0.25em;
-}
-sup {
-  top: -0.5em;
-}
 table {
   text-indent: 0;
   border-color: inherit;
@@ -135,11 +75,6 @@ table {
 ::-webkit-scrollbar {
   display: none;
 }
-ul {
-  margin: 0;
-  padding: 0;
-}
-/* li태그 점 빼기 */
 li {
   list-style: none;
 }
@@ -149,7 +84,6 @@ button {
 }
 button,
 input,
-optgroup,
 select,
 textarea {
   font-family: inherit;
@@ -165,7 +99,6 @@ textarea {
 }
 button:focus,
 input:focus,
-optgroup:focus,
 select:focus,
 textarea:focus {
   outline: none;
@@ -176,19 +109,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
-button,
-select {
-  text-transform: none;
-}
-select,
-input {
-  border: 1px solid #bbb;
-  padding: 0K 5px;
-}
-blockquote,
-dd,
-dl,
-figure,
+ul,
 h1,
 h2,
 h3,
@@ -199,19 +120,6 @@ hr,
 p,
 pre {
   margin: 0;
-}
-fieldset {
-  margin: 0;
-}
-fieldset,
-legend {
-  padding: 0;
-}
-menu,
-ol,
-ul {
-  list-style: none;
-  margin: 0;
   padding: 0;
 }
 textarea {
@@ -219,11 +127,11 @@ textarea {
 }
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-  color: #9ca3af;
+  color: #aaa;
 }
 input::placeholder,
 textarea::placeholder {
-  color: #9ca3af;
+  color: #aaa;
   font-size: 14px;
 }
 [role="button"],
@@ -233,66 +141,22 @@ button {
 :disabled {
   cursor: default;
 }
-audio,
 canvas,
-embed,
-iframe,
 img,
-object,
-svg,
-video {
+svg {
   display: block;
   vertical-align: middle;
 }
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
-[hidden] {
-  display: none;
-}
 
-.loading {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-main {
-  /* min-height: 100vh; */
-  overflow-x: hidden;
-  overflow-y: scroll;
-  margin-left: 75px;
-}
-
-@media screen and (max-width: 1000px) {
-  main {
-    margin-left: 0;
-  }
-}
-
-.mainTitle {
-  font-size: 18px;
-  letter-spacing: -0.4px;
-  padding: 30px 0 0 50px;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 svg {
+  width: 20px;
+  height: 20px;
   display: inline-block;
   vertical-align: -0.0125em;
 }
-.mainTitle .icon {
-  width: 20px;
-  height: 20px;
-}
-.tooltip-inner {
+
+/* .tooltip-inner {
   max-width: 50vw !important;
   text-align: start !important;
   padding: 1rem !important;
-}
+} */
