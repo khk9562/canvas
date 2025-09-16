@@ -57,23 +57,7 @@ import SvgCanvasMove from "@/public/icons/canvas/canvas-move.svg"
 import SvgCanvasFit from "@/public/icons/canvas/canvas-fit.svg"
 import fontFamilyList from "@/constants/fonts"
 
-interface Item {
-  id: number
-  nickname: string
-  amount: number
-  combo: string
-  sticker: string
-  txt: string
-}
-interface OpenState {
-  openResize: boolean
-  openText: boolean
-  openPictures: boolean
-  openFigures: boolean
-  openSpoonStickers: boolean
-  openSticker: boolean
-  openFix: boolean
-}
+import type { Item, OpenState } from "@/types/canvas/types"
 
 export default function Page() {
   const router = useRouter()
