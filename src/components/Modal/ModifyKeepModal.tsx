@@ -1,23 +1,23 @@
-"use client";
-import React, { useState, useEffect, useContext } from "react";
-import { Modal, Table } from "react-bootstrap";
-import styles from "./ModifyKeepModal.module.css";
-import { PlayListContext } from "@/app/providers/playlistProvider";
-import { useRouter } from "next/navigation";
-import SvgClose from "@/public/icons/close.svg";
+"use client"
+import React, { useState, useEffect, useContext } from "react"
+import { Modal, Table } from "react-bootstrap"
+import styles from "./ModifyKeepModal.module.css"
+import { PlayListContext } from "@/providers/playlistProvider"
+import { useRouter } from "next/navigation"
+import SvgClose from "@/public/icons/close.svg"
 
 interface ModalType {
-  tag: string;
-  show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  tag: string
+  show: boolean
+  setShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
-  const { session } = useContext(PlayListContext);
+  const { session } = useContext(PlayListContext)
 
-  const [data, setData] = useState<any[]>([]);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [selectedItemId, setSelectedItemId] = useState<string>("");
+  const [data, setData] = useState<any[]>([])
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [selectedItemId, setSelectedItemId] = useState<string>("")
 
   const getRouletteKeep = async (tag: string) => {
     try {
@@ -30,21 +30,21 @@ export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
         body: JSON.stringify({
           tag: tag,
         }),
-      };
+      }
       const fetchResponse = await fetch(
         `${process.env.NEXT_PUBLIC_ROOROO_API as string}/roulette/keep/get`,
         settings
-      );
+      )
 
-      const data = await fetchResponse.json();
+      const data = await fetchResponse.json()
       if (data?.ok) {
-        setData(data.data);
+        setData(data.data)
         // setStickerCate(data?.data);
       }
     } catch (e) {
-      console.error("getRouletteKeep", e);
+      console.error("getRouletteKeep", e)
     }
-  };
+  }
 
   const deleteRouletteKeep = async (id: string) => {
     try {
@@ -57,31 +57,31 @@ export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
         body: JSON.stringify({
           id: id,
         }),
-      };
+      }
       const fetchResponse = await fetch(
         `${process.env.NEXT_PUBLIC_ROOROO_API as string}/roulette/keep/del`,
         settings
-      );
+      )
 
-      const data = await fetchResponse.json();
+      const data = await fetchResponse.json()
       if (data?.ok) {
         // setStickerCate(data?.data);
-        getRouletteKeep(tag);
+        getRouletteKeep(tag)
       }
     } catch (e) {
-      console.error("deleteRouletteKeep", e);
+      console.error("deleteRouletteKeep", e)
     }
-  };
+  }
 
   useEffect(() => {
-    getRouletteKeep(tag);
-  }, [tag]);
+    getRouletteKeep(tag)
+  }, [tag])
 
   return (
     <>
       <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
         centered
         show={show}
         className={styles.modal}
@@ -90,9 +90,9 @@ export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
           <h5 className={styles.modalTitle}>킵 목록</h5>
 
           <button
-            type="button"
+            type='button'
             onClick={() => {
-              setShow(false);
+              setShow(false)
             }}
           >
             <SvgClose className={styles.icon} />
@@ -115,11 +115,11 @@ export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
                   <td>
                     {/* <input type="checkbox" /> */}
                     <button
-                      type="button"
+                      type='button'
                       className={styles.useynBtn}
                       onClick={() => {
-                        setSelectedItemId(item.id);
-                        setShowModal(true);
+                        setSelectedItemId(item.id)
+                        setShowModal(true)
                       }}
                     >
                       사용처리
@@ -133,7 +133,7 @@ export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
         <Modal.Footer className={styles.modalFooter}>
           <button
             onClick={() => {
-              setShow(false);
+              setShow(false)
             }}
           >
             확인
@@ -144,14 +144,14 @@ export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
       <Modal
         className={styles.modal}
         show={showModal}
-        size="sm"
+        size='sm'
         onHide={() => setShowModal(false)}
       >
         <Modal.Header className={styles.modalHeader}>
           <button
             style={{ marginLeft: "auto" }}
             className={styles.ghostModalClose}
-            type="button"
+            type='button'
             onClick={() => setShowModal(false)}
           >
             <SvgClose className={styles.icon} />
@@ -161,18 +161,18 @@ export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
         <Modal.Body>정말 삭제하시겠습니까?</Modal.Body>
         <Modal.Footer>
           <button
-            type="button"
+            type='button'
             onClick={() => {
-              deleteRouletteKeep(selectedItemId);
-              setShowModal(false);
+              deleteRouletteKeep(selectedItemId)
+              setShowModal(false)
             }}
           >
             확인
           </button>
           <button
-            type="button"
+            type='button'
             onClick={() => {
-              setShowModal(false);
+              setShowModal(false)
             }}
           >
             취소
@@ -180,5 +180,5 @@ export default function ModifyKeepModal({ tag, show, setShow }: ModalType) {
         </Modal.Footer>
       </Modal>
     </>
-  );
+  )
 }

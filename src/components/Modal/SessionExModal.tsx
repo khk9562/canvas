@@ -1,35 +1,35 @@
-"use client";
-import React, { useState, useEffect, useContext } from "react";
-import { Modal } from "react-bootstrap";
-import styles from "./LoginErrorModal.module.css";
-import { PlayListContext } from "@/app/providers/playlistProvider";
-import { useRouter } from "next/navigation";
-import SvgClose from "@/public/icons/close.svg";
+"use client"
+import React, { useState, useEffect, useContext } from "react"
+import { Modal } from "react-bootstrap"
+import styles from "./LoginErrorModal.module.css"
+import { PlayListContext } from "@/providers/playlistProvider"
+import { useRouter } from "next/navigation"
+import SvgClose from "@/public/icons/close.svg"
 
 export default function SessionExModal(props: any) {
-  const router = useRouter();
+  const router = useRouter()
   const { showSessionExModal, setShowSessionExModal } =
-    useContext(PlayListContext);
+    useContext(PlayListContext)
 
   return (
     <Modal
       {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
+      size='lg'
+      aria-labelledby='contained-modal-title-vcenter'
       centered
       show={showSessionExModal}
       className={styles.modal}
     >
       <Modal.Header className={styles.modalHeader}>
         <Modal.Title
-          id="contained-modal-title-vcenter"
+          id='contained-modal-title-vcenter'
           style={{ margin: "0 auto" }}
         >
           <h5 className={styles.modalTitle}>세션 만료</h5>
           <button
             onClick={() => {
-              setShowSessionExModal(false);
-              router.push("/");
+              setShowSessionExModal(false)
+              router.push("/")
             }}
           >
             <SvgClose className={styles.icon} />
@@ -48,13 +48,13 @@ export default function SessionExModal(props: any) {
       <Modal.Footer className={styles.modalFooter}>
         <button
           onClick={() => {
-            setShowSessionExModal(false);
-            router.push("/");
+            setShowSessionExModal(false)
+            router.push("/")
           }}
         >
           확인
         </button>
       </Modal.Footer>
     </Modal>
-  );
+  )
 }

@@ -1,29 +1,29 @@
-"use client";
-import React, { useState, useEffect, useContext } from "react";
-import { Modal } from "react-bootstrap";
-import styles from "./LoginErrorModal.module.css";
-import { PlayListContext } from "@/app/providers/playlistProvider";
-import SvgClose from "@/public/icons/close.svg";
+"use client"
+import React, { useState, useEffect, useContext } from "react"
+import { Modal } from "react-bootstrap"
+import styles from "./LoginErrorModal.module.css"
+import { PlayListContext } from "@/providers/playlistProvider"
+import SvgClose from "@/public/icons/close.svg"
 
 export default function LoginErrorModal(props: any) {
   const { showLoginErrorModal, setShowLoginErrorModal } =
-    useContext(PlayListContext);
+    useContext(PlayListContext)
 
   return (
     <Modal
       {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
+      size='lg'
+      aria-labelledby='contained-modal-title-vcenter'
       centered
       show={showLoginErrorModal}
       className={styles.modal}
     >
       <Modal.Header className={styles.modalHeader}>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title id='contained-modal-title-vcenter'>
           <h5 className={styles.modalTitle}>로그인 에러</h5>
           <button
             onClick={() => {
-              setShowLoginErrorModal(false);
+              setShowLoginErrorModal(false)
             }}
           >
             <SvgClose className={styles.icon} />
@@ -39,12 +39,12 @@ export default function LoginErrorModal(props: any) {
       <Modal.Footer className={styles.modalFooter}>
         <button
           onClick={() => {
-            setShowLoginErrorModal(false);
+            setShowLoginErrorModal(false)
           }}
         >
           확인
         </button>
       </Modal.Footer>
     </Modal>
-  );
+  )
 }
