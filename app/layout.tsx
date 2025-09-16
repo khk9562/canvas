@@ -1,11 +1,9 @@
 "use client"
 import "./globals.css"
 import "bootstrap/dist/css/bootstrap.min.css"
-import { PlayListContext, PlayListProvider } from "@/providers/playlistProvider"
-import { usePathname, useRouter } from "next/navigation"
-import { useContext, useEffect, useState } from "react"
 import Head from "next/head"
 import "../public/static/fonts/style.css"
+import useSetViewportHeight from "@/hooks/shared/useSetViewportHeight"
 
 declare global {
   interface Window {
@@ -19,22 +17,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { showLoginErrorModal, session } = useContext(PlayListContext)
-  const pathname = usePathname()
-
-  const setVhProperty = () => {
-    const vh = window.innerHeight * 0.01
-    document.documentElement.style.setProperty("--vh", `${vh}px`)
-  }
-
-  useEffect(() => {
-    setVhProperty()
-    window.addEventListener("resize", setVhProperty)
-
-    return () => {
-      window.removeEventListener("resize", setVhProperty)
-    }
-  }, [])
+  useSetViewportHeight()
 
   return (
     <html lang='ko'>
