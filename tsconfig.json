@@ -27,7 +27,6 @@
       "@/constants/*": ["./src/constants/*"],
       "@/providers/*": ["./src/providers/*"],
       "@/api/*": ["./src/api/*"],
-      "@/layouts/*": ["./src/layouts/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/hooks/*": ["./src/hooks/*"]
     }

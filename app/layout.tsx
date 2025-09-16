@@ -27,10 +27,7 @@ export default function RootLayout({
     document.documentElement.style.setProperty("--vh", `${vh}px`)
   }
 
-  const [mounted, setMounted] = useState(false)
-
   useEffect(() => {
-    setMounted(true)
     setVhProperty()
     window.addEventListener("resize", setVhProperty)
 
@@ -47,11 +44,7 @@ export default function RootLayout({
         <meta name='viewport' content='initial-scale=1, viewport-fit=cover' />
       </Head>
 
-      <body>
-        <PlayListProvider>
-          <main>{children}</main>
-        </PlayListProvider>
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

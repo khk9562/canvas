@@ -11,7 +11,7 @@ import { fabric } from "fabric"
 import { FabricJSCanvas } from "fabricjs-react"
 import { Modal } from "react-bootstrap"
 
-import ArticleTit from "@/layouts/ArticleTit/ArticleTit"
+import ArticleTit from "@/components/ArticleTit/ArticleTit"
 import ToastInfo from "@/components/Modal/ToastInfo"
 import CanvasSidebar from "@/components/CanvasComponents/CanvasSidebar/CanvasSidebar"
 import CanvasNotice from "@/components/CanvasComponents/CanvasNotice/CanvasNotice"
