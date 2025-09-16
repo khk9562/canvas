@@ -1,0 +1,860 @@
+.cont {
+}
+.cont * {
+  letter-spacing: -0.4px;
+}
+.cont input[type="color"] {
+  position: relative;
+  border-radius: 3px;
+  border: 0 none;
+  background-color: transparent;
+  width: 35px;
+  min-width: 35px;
+  height: 28px;
+  cursor: pointer;
+}
+.cont input[type="color"]:hover::after,
+.cont input[type="color"]:focus::after {
+  width: 24px;
+  height: 23px;
+  content: "";
+  background-color: transparent;
+  position: absolute;
+  left: 5.5px;
+  top: 2px;
+  outline: 3px solid var(--lesspoint);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: black;
+}
+
+.canvasHeader {
+  z-index: 10;
+  width: fit-content;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 20px;
+}
+.canvasHeader > select {
+  height: 40px;
+  border-radius: 8px;
+  padding: 0 10px;
+}
+
+.canvasHeader > button,
+.plusNav > button,
+.sideNav > button {
+  width: 52px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+}
+
+.sideNav > button {
+  color: white;
+}
+.sideNav .icon {
+  fill: white;
+}
+.canvasHeader > button:hover > span,
+.plusNav > button:hover > span,
+.sideNav > button:hover > span,
+.canvasHeader > button:focus > span,
+.plusNav > button:focus > span,
+.sideNav > button:focus > span {
+  font-weight: 800;
+  transform: scale(1.1);
+}
+.canvasHeader > button:hover > .icon,
+.plusNav > button:hover > .icon,
+.sideNav > button:hover > .icon,
+.canvasHeader > button:focus > .icon,
+.plusNav > button:focus > .icon,
+.sideNav > button:focus > .icon {
+  transform: scale(1.2);
+}
+.canvasHeader > button > span,
+.sideNav > button > span {
+  font-size: 9px;
+  letter-spacing: -0.4px;
+}
+
+.plusNav {
+  border-radius: 10px;
+  position: absolute;
+  left: 8px;
+  top: 65px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 16;
+}
+.plusNav > button > span {
+  font-size: 9px;
+  line-height: 1;
+}
+
+.sideNav {
+  z-index: 15;
+  background-color: #333;
+  position: relative;
+  overflow-y: hidden;
+  position: absolute;
+  right: 5px;
+  top: 65px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px 0;
+}
+
+.addStButton .icon {
+  fill: var(--point);
+}
+.rangebox {
+  position: relative;
+}
+.rangebox span {
+  font-size: 8px;
+  color: #555;
+  position: absolute;
+  bottom: 0;
+}
+.rangebox span:first-child {
+  left: 0;
+}
+.rangebox span:last-child {
+  right: 0;
+}
+
+/* 컴포넌트 클래스 통합 중 */
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 12px 0;
+}
+.inputBox label {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.inputBox label h6 {
+  word-break: keep-all;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: auto;
+}
+.inputBox textarea {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+}
+.inputBox input[type="text"],
+.inputBox input[type="button"] {
+  width: 130px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 0 10px;
+  text-align: center;
+}
+.inputBox input[type="number"],
+.inputBox select {
+  width: 80px;
+  max-width: max-content;
+  height: 40px;
+  border-radius: 8px;
+  padding: 0 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.canvasSizeKindBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.canvasSizeKindBtns > button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.canvasSizeKindBtns > button:hover {
+  color: var(--point);
+}
+.canvasSizeKindBtns > button > span {
+  font-size: 10px;
+}
+
+.textbox select,
+.textbox input[type="text"] {
+  width: 160px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 0 10px;
+}
+
+.figuresbox {
+  padding: 25px 20px;
+  gap: 30px;
+}
+.textbox {
+  padding: 25px;
+  gap: 30px;
+}
+.ffPreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #efefef;
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.fontFamilyList {
+  position: relative;
+  width: 100%;
+}
+.fontFamilyList input[type="button"] {
+  border: 0 none;
+  background-color: transparent;
+  width: 100%;
+  height: 45px;
+  min-height: 45px;
+}
+.fontFamilyList .icon {
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  color: #555;
+  cursor: pointer;
+}
+
+.fontNav {
+  padding: 10px 0;
+  border: 1px solid #eee;
+  position: absolute;
+  left: 0;
+  top: 43px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background-color: white;
+  z-index: 50;
+  box-shadow: 0 2px 3px 3px rgba(0, 0, 0, 0.02);
+  /* border-radius: 0 0 8px 8px; */
+  border-radius: 5px;
+  max-height: calc(var(--vh, 1vh) * 50);
+  overflow-y: auto;
+  width: 200px;
+}
+.fontNav input {
+  /* padding-right: 20px; */
+}
+.fontNav input:hover {
+  background-color: var(--nopoint);
+}
+.fontNav input.active {
+  background-color: var(--lesspoint);
+}
+
+.figureBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  margin-top: 10px;
+  margin: 0 auto;
+}
+
+.figureBtns > button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #eee;
+  background-color: #eee;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  font-size: 12px;
+  width: 100%;
+}
+.figureBtns > button > span {
+  text-align: center;
+}
+
+.previewUpload > div img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.addButton {
+  width: 100%;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  border-radius: 5px;
+  color: white;
+  padding: 7px;
+  gap: 5px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.addButton:hover {
+  font-weight: 700;
+  background-color: var(--point);
+}
+.addButton .icon {
+  width: 11px;
+  height: 11px;
+  fill: white;
+  margin-bottom: 2px;
+}
+
+.stickernotice {
+  font-size: 12px;
+  color: var(--point);
+}
+
+.sticker {
+  position: relative;
+  background-color: white;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  padding: 0 15px 0 3px;
+  min-height: 45px;
+  border-radius: 5px;
+}
+.fixDel {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+}
+.fixDel:hover .icon {
+  fill: tomato;
+}
+.fixDel .icon {
+  width: 18px;
+  height: 18px;
+  fill: #000;
+}
+.sticker > li {
+  margin-right: 2px;
+  margin-left: 5px;
+}
+.sticker .stickerNick {
+  color: black;
+  max-width: calc(70vw / 3);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.sticker .stickerSpoon,
+.sticker .stickerCombo {
+  color: tomato;
+  max-width: calc(70vw / 3);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.sticker .stickerSpoon {
+  font-size: 14px;
+  margin-left: 10px;
+}
+.sticker .stickerCombo {
+  font-size: 20px;
+  font-weight: 700;
+}
+.sticker img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.imgs {
+  position: relative;
+}
+
+.imgs button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+.imgs button .icon {
+  fill: tomato;
+  width: 15px;
+  height: 15px;
+}
+.imgsbox {
+  gap: 10px;
+  overflow-y: scroll;
+  background-color: #eee;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.canvasCont {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  display: flex;
+  flex: 1;
+  height: calc(var(--vh, 1vh) * 100 - 60px);
+  background-color: #efefef;
+}
+.canvasBox {
+  position: relative;
+  width: calc(100vw - 60px);
+  max-height: calc(var(--vh, 1vh) * 100);
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px 0px 0px 8dvh;
+}
+.canvas {
+  padding-right: 70px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.canvas > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.canvas > div canvas {
+  background-color: white;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.05);
+}
+.canvas > div canvas:nth-child(2) {
+  background-color: transparent;
+}
+
+/* 모달 수정 */
+.modal {
+  margin-top: calc(var(--vh, 1vh) * 10);
+  height: calc(var(--vh, 1vh) * 80);
+}
+.modalHeader {
+  justify-content: center !important;
+}
+.modalHeader h4 {
+  font-size: 18px;
+  margin: 0;
+  letter-spacing: -0.4px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.modalClose {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+.modalClose .icon {
+  width: 16px;
+  height: 16px;
+  fill: #333;
+}
+.modalBody {
+  /* m-height: calc(var(--vh, 1vh) * 40); */
+}
+
+.modalFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.addtxt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  min-height: 60px;
+  flex-wrap: wrap;
+}
+.addtxt > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.addtxt > div label {
+  font-size: 14px;
+  letter-spacing: -0.4px;
+  font-weight: 600;
+}
+.addtxt > div input {
+  font-size: 15px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: #efefef;
+}
+.addtxt > div input[type="number"] {
+  width: 70px;
+}
+.addtxt > div input:focus {
+  border: 1px solid #ddd;
+  outline: none;
+  box-shadow: none;
+}
+
+.modalFooter .btns {
+  margin-left: auto;
+}
+.modalFooter .btns button {
+  font-size: 15px;
+  letter-spacing: -0.4px;
+  color: #333;
+  padding: 5px 15px;
+  width: 80px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.modalFooter .btns button:first-child {
+  font-weight: 600;
+  margin-right: 10px;
+}
+.modalFooter .btns button:first-child:hover,
+.modalFooter .btns button:first-child:focus {
+  color: white;
+  background-color: #333;
+  font-weight: bolder;
+}
+.modalFooter .btns button:last-child {
+  color: gray;
+}
+.lottieimg {
+  max-height: 350px;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  max-width: 280px;
+  object-fit: contain;
+}
+.lottieimg > svg {
+  max-height: 350px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+.anibox {
+  overflow-y: scroll;
+  max-height: calc(var(--vh, 1vh) * 100 - 140px);
+}
+.anibox .aniitem {
+  min-height: max-content;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.aniPlayBtns {
+  margin: 0 auto;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.aniPlayBtns > button {
+  width: 80px;
+  height: 35px;
+}
+.aniPlayBtns > button:hover .icon {
+  fill: var(--point);
+}
+
+/* 스티커 박스 */
+
+.stickersbox {
+  width: 300px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center center;
+  padding: 0 10px 20px 0;
+  grid-column-gap: 8px;
+  grid-row-gap: 5px;
+  background-color: white;
+  overflow-y: scroll;
+}
+.stickeritem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 5px;
+  height: 70px;
+  overflow: hidden;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+}
+.stickeritem:hover {
+  box-shadow: none;
+  border: none;
+}
+.stickeritem:hover > img {
+  transform: scale(1.5) translateY(6px);
+}
+.stickersbox > .stickeritem:nth-child(4n + 1):hover > img {
+  transform: scale(1.5) translateY(6px) translateX(5px);
+}
+.stickeritem > img {
+  width: 65px;
+  height: 65px;
+  background-color: white;
+  object-fit: contain;
+  transition: all 0.1s ease-out;
+}
+.stickeritem > span {
+  text-align: center;
+  font-size: 10px;
+  line-height: 1;
+  margin-top: 3px;
+}
+.stickeritem > span::before {
+  content: "🌕";
+  margin-right: 5px;
+  font-size: 5px;
+}
+.stickeritem > button {
+  border-radius: 3px;
+  background-color: rgb(112, 202, 172);
+  color: #000;
+  font-weight: 800;
+  font-size: 6px;
+  padding: 0 2px;
+  position: absolute;
+  top: 5px;
+  right: 3px;
+}
+
+.navStickerStroke {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: absolute;
+  left: 90px;
+  top: 70px;
+  background-color: #fff;
+  z-index: 10;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+.navStickerStroke h6 {
+  font-weight: 800;
+}
+.navStickerStroke > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ststwidthbox {
+  width: 110px;
+  position: relative;
+  padding-top: 5px;
+  text-align: center;
+}
+.ststwidthbox span {
+  position: absolute;
+  top: 8px;
+  font-size: 10px !important;
+  color: #777;
+}
+.ststwidthbox span:first-child {
+  left: 0;
+}
+.ststwidthbox span:last-child {
+  right: 0;
+}
+.navStickerStroke label {
+  font-size: 14px;
+  font-weight: 600;
+}
+.navStickerStroke > div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.navStickerStroke > div > div input {
+  width: 80px;
+  font-size: 13px;
+}
+.navStickerStroke > div > div input[type="number"] {
+  width: 50px !important;
+}
+.navStickerStroke > div > div span {
+  font-size: 13px;
+  font-weight: 600;
+}
+.noLiveIdToast {
+  /* max-width: 260px; */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  background-color: var(--point);
+  z-index: 50;
+}
+.noLiveIdToast span {
+  color: white;
+  padding-right: 5px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.zoomBox {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.zoomInnerBox {
+  width: fit-content;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 5px;
+}
+
+.zoomBox span {
+  background-color: #eee;
+  width: 65px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  display: block;
+  border-radius: 5px;
+}
+.zoomBox button {
+  width: 35px;
+  border-radius: 5px;
+}
+.zoomBox button:not(:last-child):hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.zoomBox button:last-child:hover {
+  transform: rotate(-360deg);
+  transition: transform 0.5s ease-in-out;
+}
+.zoomBox button:last-child .icon {
+  width: 18px;
+  height: 18px;
+}
+
+@media screen and (max-height: 1700px) {
+  .plusNav {
+    /* left: 90px; */
+    /* left: 140px; */
+  }
+}
+@media screen and (max-width: 800px) {
+  .canvasHeader {
+    position: fixed;
+    top: 55px;
+    left: 0;
+    /* flex-direction: column; */
+    height: auto;
+    width: 100vw;
+    /* flex-wrap: wrap; */
+    overflow-x: scroll;
+    background-color: white;
+    box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.1);
+  }
+  .zoomInnerBox {
+    width: auto;
+  }
+  .canvasBox {
+    width: 100vw;
+  }
+  .lottieimg {
+    max-height: 300px;
+  }
+  .lottieimg > svg {
+    max-height: 300px;
+  }
+  .plusNav {
+    top: auto;
+    bottom: 0;
+    left: 50px;
+    right: auto;
+    flex-direction: row;
+    max-width: 100vw;
+  }
+  .plusNavBtn {
+    top: auto;
+    bottom: 8px;
+    left: 10px;
+    right: auto;
+  }
+  .sideNav {
+    right: 5px;
+    top: 218px;
+  }
+  .sideNavBtn {
+    top: 180px;
+    right: 15px;
+  }
+}

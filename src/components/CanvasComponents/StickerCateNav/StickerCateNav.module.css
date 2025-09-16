@@ -1,0 +1,53 @@
+.stickersnav {
+  position: relative;
+  width: 300px;
+  /* width: 100%; */
+}
+.stickersnav > div {
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 35px;
+  min-height: 50px;
+  height: 50px;
+  background-color: white;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.stickersnav > div > button {
+  width: max-content;
+  background-color: #efefef;
+  color: gray;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  word-break: keep-all;
+}
+.stickersnav > div > button.active {
+  background-color: #333;
+  color: white;
+}
+.stickersnav .btn {
+  position: absolute;
+  top: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 15px;
+}
+.stickersnav .lbtn {
+  left: 0;
+}
+.stickersnav .rbtn {
+  right: 0;
+}
+.stickersnav .btn .icon {
+  width: 15px;
+  height: 15px;
+  fill: #333;
+}

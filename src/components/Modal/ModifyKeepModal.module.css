@@ -1,0 +1,26 @@
+.modal {
+}
+
+.modalTitle {
+  padding-top: 3px;
+}
+
+.modalHeader > button {
+}
+
+.modalHeader > button .icon {
+  fill: #333;
+  width: 18px;
+  height: 18px;
+}
+
+.useynBtn {
+  font-size: 13px;
+  background-color: #333;
+  color: #eee;
+  border-radius: 8px;
+  padding: 6px 7px 5px;
+}
+.useynBtn:hover {
+  color: var(--point);
+}

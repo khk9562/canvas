@@ -1,4 +1,4 @@
-// File: /Users/stella/Documents/GitHub/canvas/app/page.tsx
+// File: /Users/stella/Desktop/Project/canvas/app/page.tsx
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

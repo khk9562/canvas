@@ -1,0 +1,11 @@
+.plusNavBtn {
+  position: fixed;
+  /* left: 80px;
+    top: 65px; */
+  bottom: 5px;
+  right: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
