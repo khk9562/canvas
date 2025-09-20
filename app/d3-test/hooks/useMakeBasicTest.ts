@@ -79,37 +79,48 @@ export default function useMakeBasicTest() {
     const actualWidth = svgElement?.getBoundingClientRect().width || 0
     const actualHeight = svgElement?.getBoundingClientRect().height || 0
 
-    // viewBox를 실제 크기에 맞춰 동적 설정
-    svg.attr("viewBox", `0 0 ${actualWidth} ${actualHeight}`)
-
     const margin = {
       left: 50,
       right: 50,
+      top: 50,
+      bottom: 50,
     }
 
     const chartWidth = Math.max(actualWidth - margin.left - margin.right, 0)
+    const chartHeight = Math.max(actualHeight - margin.top - margin.bottom, 0)
 
-    console.log("chartWidth", chartWidth)
+    const xScale = d3
+      .scaleBand()
+      .domain(testData.map((d, i) => i.toString()))
+      .range([0, chartWidth])
+      .padding(0.1) // gap 비율로 조절
 
-    const gap = 10
-    const barWidth =
-      (chartWidth - (testData.length - 1) * gap) / testData.length
-    console.log("barWidth", barWidth)
+    const yScale = d3
+      .scaleLinear()
+      .domain([0, d3.max(testData) || 0])
+      .range([chartHeight, 0]) // svg는 위가 0이므로 뒤집기
+
+    // viewBox를 실제 크기에 맞춰 동적 설정
+    // svg.attr("viewBox", `0 0 ${actualWidth} ${actualHeight}`)
+
+    // const gap = 10
+    // const barWidth =
+    //   (chartWidth - (testData.length - 1) * gap) / testData.length
+    // console.log("barWidth", barWidth)
 
     const chartGroup = svg
       .append("g")
-      .attr("transform", `translate(${margin.left}, 0)`)
+      .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
     chartGroup
       .selectAll("rect")
       .data(testData)
       .enter()
       .append("rect")
-      .attr("x", (d, i) => i * (barWidth + gap))
-      .attr("y", 0)
-      // .attr("y", (d, i) => i * 70)
-      .attr("width", barWidth)
-      .attr("height", (d) => d * 4)
+      .attr("x", (d, i) => xScale(i.toString() || 0))
+      .attr("y", (d) => yScale(d))
+      .attr("width", xScale.bandwidth()) // 자동계산된 바 너비
+      .attr("height", (d) => chartHeight - yScale(d))
       .attr("fill", (d, i) => COLORS[i % COLORS.length])
   }
 
@@ -123,5 +134,6 @@ export default function useMakeBasicTest() {
   return {
     svgRef,
     containerRef,
+    createDirectlyBarChart,
   }
 }

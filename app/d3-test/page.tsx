@@ -4,12 +4,14 @@ import styles from "./page.module.css"
 import * as d3 from "d3"
 import useMakeBasicTest from "./hooks/useMakeBasicTest"
 import { useRouter, usePathname } from "next/navigation"
+import useResizeObserver from "./hooks/useResizeObserver"
 
 // d3 테스트 메인 페이지
 export default function D3TestPage() {
   const router = useRouter()
   const pathname = usePathname()
-  const { containerRef, svgRef } = useMakeBasicTest()
+  const { containerRef, svgRef, createDirectlyBarChart } = useMakeBasicTest()
+  useResizeObserver({ createChart: createDirectlyBarChart, svgRef })
 
   return (
     <article className={styles.chartTestPage} ref={containerRef}>
