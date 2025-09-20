@@ -1,74 +1,127 @@
 import { useEffect, useRef } from "react"
 import * as d3 from "d3"
+import { COLORS } from "../constants/colors"
 
 export default function useMakeBasicTest() {
   const svgRef = useRef<SVGSVGElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    // 1. 기본 텍스트 추가
-    if (containerRef.current) {
-      d3.select(containerRef.current)
-        .append("p")
-        .text("Hello D3 from Next.js!")
-        .style("color", "green")
-        .style("font-size", "18px")
-    }
+  // 바 차트 데이터
+  const testData = [30, 80, 45, 60, 20, 90, 75]
 
-    // 2. 데이터로 DIV 만들기
-    const data = [10, 20, 30, 40, 50]
-    d3.select(containerRef.current)
-      .selectAll(".bar")
-      .data(data)
+  const createBarChart = () => {
+    const svg = d3.select(svgRef.current)
+
+    // SVG 전체 클리어
+    svg.selectAll("*").remove()
+
+    // 차트 설정
+    const margin = { top: 50, right: 50, bottom: 80, left: 80 }
+    const chartWidth = 1200 - margin.left - margin.right
+    const chartHeight = 400 - margin.top - margin.bottom
+    const barWidth = (chartWidth / testData.length) * 0.8
+
+    // y 스케일 (데이터 값 -> SVG 좌표)
+    const yScale = d3
+      .scaleLinear()
+      .domain([0, d3.max(testData) || 0])
+      .range([chartHeight, 0])
+
+    // 차트 그룹 생성
+    const chartGroup = svg
+      .append("g")
+      .attr("transform", `translate(${margin.left}, ${margin.top})`)
+
+    // 바 생성
+    chartGroup
+      .selectAll("rect")
+      .data(testData)
       .enter()
-      .append("div")
-      .attr("class", "bar")
-      .style("width", (d) => d * 4 + "px")
-      .style("height", "25px")
-      .style("background", "steelblue")
-      .style("margin", "2px 0")
-      .style("color", "white")
-      .style("text-align", "center")
-      .style("line-height", "25px")
+      .append("rect")
+      .attr(
+        "x",
+        (d, i) =>
+          i * (chartWidth / testData.length) +
+          (chartWidth / testData.length - barWidth) / 2
+      )
+      .attr("y", (d) => yScale(d))
+      .attr("width", barWidth)
+      .attr("height", (d) => chartHeight - yScale(d))
+      .attr("fill", (d, i) => COLORS[i % COLORS.length])
+      .attr("stroke", "#333")
+      .attr("stroke-width", 1)
+
+    // 값 라벨 추가
+    chartGroup
+      .selectAll("text")
+      .data(testData)
+      .enter()
+      .append("text")
+      .attr(
+        "x",
+        (d, i) =>
+          i * (chartWidth / testData.length) + chartWidth / testData.length / 2
+      )
+      .attr("y", (d) => yScale(d) - 10)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "14px")
+      .attr("fill", "#333")
       .text((d) => d)
 
-    // 3. SVG 바 차트
-    if (svgRef.current) {
-      const svg = d3.select(svgRef.current)
-      const chartData = [30, 80, 45, 60, 20, 90, 75]
+    console.log("바 차트 생성 완료")
+  }
 
-      svg
-        .selectAll("rect")
-        .data(chartData)
-        .enter()
-        .append("rect")
-        .attr("x", (d, i) => i * 70)
-        .attr("y", (d) => 300 - d * 3)
-        .attr("width", 60)
-        .attr("height", (d) => d * 3)
-        .attr("fill", "steelblue")
-        .on("click", function (event, d) {
-          alert(`값: ${d}`)
-        })
+  const createDirectlyBarChart = () => {
+    const svg = d3.select(svgRef.current)
+    svg.selectAll("*").remove()
+
+    const svgElement = svgRef.current
+    const actualWidth = svgElement?.getBoundingClientRect().width || 0
+    const actualHeight = svgElement?.getBoundingClientRect().height || 0
+
+    // viewBox를 실제 크기에 맞춰 동적 설정
+    svg.attr("viewBox", `0 0 ${actualWidth} ${actualHeight}`)
+
+    const margin = {
+      left: 50,
+      right: 50,
     }
 
-    // 브라우저 콘솔에 d3를 전역으로 노출 (개발용)
-    ;(window as any).d3 = d3
-    console.log("✅ D3가 window.d3에 노출되었습니다!")
-    console.log("콘솔에서 d3.version 또는 window.d3.version을 입력해보세요")
-  }, [])
+    const chartWidth = Math.max(actualWidth - margin.left - margin.right, 0)
 
-  const handleButtonTest = () => {
-    // 버튼 클릭으로 D3 테스트
-    d3.select(containerRef.current)
-      .append("p")
-      .text(`새 텍스트 추가됨: ${new Date().toLocaleTimeString()}`)
-      .style("color", "red")
+    console.log("chartWidth", chartWidth)
+
+    const gap = 10
+    const barWidth =
+      (chartWidth - (testData.length - 1) * gap) / testData.length
+    console.log("barWidth", barWidth)
+
+    const chartGroup = svg
+      .append("g")
+      .attr("transform", `translate(${margin.left}, 0)`)
+
+    chartGroup
+      .selectAll("rect")
+      .data(testData)
+      .enter()
+      .append("rect")
+      .attr("x", (d, i) => i * (barWidth + gap))
+      .attr("y", 0)
+      // .attr("y", (d, i) => i * 70)
+      .attr("width", barWidth)
+      .attr("height", (d) => d * 4)
+      .attr("fill", (d, i) => COLORS[i % COLORS.length])
   }
+
+  useEffect(() => {
+    if (svgRef.current) {
+      // createBarChart()
+      createDirectlyBarChart()
+    }
+  }, [])
 
   return {
     svgRef,
     containerRef,
-    handleButtonTest,
   }
 }

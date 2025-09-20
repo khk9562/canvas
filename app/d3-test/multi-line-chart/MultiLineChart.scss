@@ -1,0 +1,109 @@
+#chartContainer {
+  background-color: rgba(5, 12, 30, 1);
+  position: relative;
+  width: 100%;
+  min-height: calc(var(--vh) * 100);
+  padding: 2.5rem;
+  & > h1 {
+    color: var(--text-primary);
+    padding-bottom: 2rem;
+  }
+}
+
+.multi-legend {
+  position: absolute;
+}
+
+.multi-x-Tooltip {
+  position: absolute;
+  padding: 13px;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  color: var(--text-primary);
+}
+
+.legend {
+  // position: absolute;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+}
+
+.multi-tooltip {
+  pointer-events: none;
+  position: absolute; // 가장 위에 띄우려면 fixed 권장
+  left: 0; // JS에서 동적 제어
+  top: 0;
+  max-width: 500px;
+  min-width: 120px;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-primary);
+  backdrop-filter: blur(4px);
+  border-radius: 5px;
+  transition: opacity 0.2s;
+  color: var(--text-primary);
+  z-index: 10000 !important;
+  pointer-events: none;
+}
+
+.label-circle {
+  position: absolute;
+  margin-top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.label-txt {
+  position: absolute;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-top: -5px;
+  width: 70px;
+  height: 20px;
+  color: var(--text-primary);
+  font-family: Pretendard;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label-value {
+  position: absolute;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-top: 15px;
+  width: 100px;
+  height: 20px;
+  color: var(--text-primary);
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.d-multi-item {
+  width: 80px;
+  height: 50px;
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 13px;
+  padding: 10 10 10 10;
+}
+
+.time-txt {
+  font-size: 8px;
+  margin: 5px;
+}
+
+.y-text {
+  font-size: 13px;
+}

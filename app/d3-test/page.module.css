@@ -1,0 +1,20 @@
+.chartTestPage {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+  width: 100%;
+}
+.boxCont {
+  border: 1px solid #ccc;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 1200px;
+  aspect-ratio: 1200 / 2000;
+}
+.navBtns {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
