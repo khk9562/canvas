@@ -5,12 +5,29 @@ import * as d3 from "d3"
 import { DataPoint, RealtimeChartTypes } from "@/types/d3/RealtimChartTypes"
 import styles from "./RealtimeChart.module.scss"
 import useSSE from "@/hooks/shared/useSSE"
+import useResizeObserver from "@/hooks/d3/useResizeObserver"
 
-export default function RealtimeChart({
-  width = 800,
-  height = 400,
-}: RealtimeChartTypes) {
+export default function RealtimeChart({ width, height }: RealtimeChartTypes) {
   const svgRef = useRef<SVGSVGElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [dimensions, setDimensions] = useState({ width: 800, height: 400 })
+
+  // 컨테이너 크기 감지
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        setDimensions({
+          width: width || rect.width || 800,
+          height: height || 400,
+        })
+      }
+    }
+
+    updateDimensions()
+    window.addEventListener("resize", updateDimensions)
+    return () => window.removeEventListener("resize", updateDimensions)
+  }, [width, height])
 
   // 차트 여백 설정
   const margin = {
@@ -19,8 +36,8 @@ export default function RealtimeChart({
     bottom: 40,
     left: 50,
   }
-  const innerWidth = width - margin.left - margin.right
-  const innerHeight = height - margin.top - margin.bottom
+  const innerWidth = dimensions.width - margin.left - margin.right
+  const innerHeight = dimensions.height - margin.top - margin.bottom
 
   // SSE 연결 및 데이터 수신
   const { isLoading, isConnected, data } = useSSE<DataPoint>()
@@ -65,8 +82,8 @@ export default function RealtimeChart({
     }
   }, [scales])
 
-  // 차트 렌더링 (D3 DOM 조작)
-  useEffect(() => {
+  // 차트 렌더링 함수 (반응형을 위해 분리)
+  const createChart = () => {
     if (!scales || !lineGenerator || !axisGenerators || data.length === 0)
       return
 
@@ -122,7 +139,15 @@ export default function RealtimeChart({
     g.select<SVGGElement>(`.${styles.xAxis}`).call(axisGenerators.x)
 
     g.select<SVGGElement>(`.${styles.yAxis}`).call(axisGenerators.y)
+  }
+
+  // 차트 렌더링 (D3 DOM 조작)
+  useEffect(() => {
+    createChart()
   }, [data, scales, lineGenerator, axisGenerators])
+
+  // 반응형 처리
+  useResizeObserver({ createChart, svgRef })
 
   console.log("data", data)
 
@@ -133,13 +158,14 @@ export default function RealtimeChart({
       </h3>
 
       <article className={styles.chartWrapper}>
-        <div className={styles.svgContainer}>
+        <div ref={containerRef} className={styles.svgContainer}>
           <svg
             ref={svgRef}
             className={styles.chartSvg}
-            width={width}
-            height={height}
-            viewBox={`0 0 ${width} ${height}`}
+            width='100%'
+            height={dimensions.height}
+            viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+            preserveAspectRatio='xMidYMid meet'
           >
             <g
               className={styles.chartGroup}

@@ -5,7 +5,10 @@ interface UseResizeObserverProps {
   svgRef: RefObject<SVGSVGElement>
 }
 
-export default function useResizeObserver({ createChart, svgRef }: UseResizeObserverProps) {
+export default function useResizeObserver({
+  createChart,
+  svgRef,
+}: UseResizeObserverProps) {
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       createChart && createChart() // 크기 변경시 차트 재생성
