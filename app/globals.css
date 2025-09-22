@@ -142,16 +142,9 @@ button {
 :disabled {
   cursor: default;
 }
-canvas,
+/* canvas,
 img,
 svg {
   display: block;
   vertical-align: middle;
-}
-
-svg {
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  vertical-align: -0.0125em;
-}
+} */

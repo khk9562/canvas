@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import * as d3 from "d3"
-import { COLORS } from "../constants/colors"
+import { COLORS } from "../../constants/d3/colors"
 
 export default function useMakeBasicTest() {
   const svgRef = useRef<SVGSVGElement>(null)
@@ -117,7 +117,7 @@ export default function useMakeBasicTest() {
       .data(testData)
       .enter()
       .append("rect")
-      .attr("x", (d, i) => xScale(i.toString() || 0))
+      .attr("x", (d, i) => xScale(i.toString()) || 0)
       .attr("y", (d) => yScale(d))
       .attr("width", xScale.bandwidth()) // 자동계산된 바 너비
       .attr("height", (d) => chartHeight - yScale(d))

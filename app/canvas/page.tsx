@@ -55,7 +55,7 @@ import SvgBoxing from "@/public/icons/canvas/boxing.svg"
 import SvgUnBoxing from "@/public/icons/canvas/unboxing.svg"
 import SvgCanvasMove from "@/public/icons/canvas/canvas-move.svg"
 import SvgCanvasFit from "@/public/icons/canvas/canvas-fit.svg"
-import fontFamilyList from "@/constants/fonts"
+import fontFamilyList from "@/constants/canvas/fonts"
 
 import type { Item, OpenState } from "@/types/canvas/types"
 

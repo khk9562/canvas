@@ -1,0 +1,338 @@
+// 컨테이너 스타일
+.container {
+  padding: 1rem;
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+}
+
+// 차트 래퍼
+.chartWrapper {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  // 반응형 처리
+  .svgContainer {
+    width: 100%;
+    overflow: hidden;
+
+    .chartSvg {
+      border: 1px solid #d1d5db;
+      display: block;
+
+      // SVG 내부 스타일들
+      .chartGroup {
+        .line {
+          fill: none;
+          stroke: #5881d4;
+          stroke-width: 2px;
+          transition: stroke-width 0.3s ease;
+
+          &:hover {
+            stroke-width: 3px;
+          }
+        }
+
+        .dot {
+          transition: all 0.3s ease;
+          cursor: pointer;
+
+          &:hover {
+            stroke: #ffffff;
+            stroke-width: 2px;
+          }
+
+          // 카테고리별 색상
+          &.categoryA {
+            fill: #ff6b6b;
+
+            &:hover {
+              fill: #ff5252;
+            }
+          }
+
+          &.categoryB {
+            fill: #4ecdc4;
+
+            &:hover {
+              fill: #26a69a;
+            }
+          }
+
+          &.categoryC {
+            fill: #45b7d1;
+
+            &:hover {
+              fill: #2196f3;
+            }
+          }
+        }
+
+        // 축 스타일
+        .xAxis,
+        .yAxis {
+          .domain {
+            stroke: #374151;
+            stroke-width: 1px;
+          }
+
+          .tick {
+            line {
+              stroke: #6b7280;
+              stroke-width: 1px;
+            }
+
+            text {
+              fill: #374151;
+              font-size: 12px;
+              font-family: system-ui, -apple-system, sans-serif;
+            }
+          }
+        }
+
+        // 축 레이블
+        .axisLabel {
+          fill: #374151;
+          font-size: 12px;
+          font-family: system-ui, -apple-system, sans-serif;
+          text-anchor: middle;
+        }
+
+        // 격자선 (optional)
+        .gridLine {
+          stroke: #f3f4f6;
+          stroke-width: 1px;
+          stroke-dasharray: 2, 2;
+        }
+      }
+    }
+  }
+}
+
+// 범례
+.legend {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f9fafb;
+    }
+
+    .legendColor {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+
+      &.categoryA {
+        background-color: #ff6b6b;
+      }
+
+      &.categoryB {
+        background-color: #4ecdc4;
+      }
+
+      &.categoryC {
+        background-color: #45b7d1;
+      }
+    }
+
+    .legendText {
+      font-size: 0.875rem;
+      color: #374151;
+      font-weight: 500;
+    }
+  }
+}
+
+// 상태 정보
+.statusInfo {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+
+  .dataCount {
+    font-weight: 600;
+    color: #059669;
+  }
+
+  .connectionStatus {
+    margin-left: 1rem;
+
+    &.connected {
+      color: #059669;
+
+      &::before {
+        content: "●";
+        margin-right: 0.25rem;
+        color: #10b981;
+      }
+    }
+
+    &.disconnected {
+      color: #dc2626;
+
+      &::before {
+        content: "●";
+        margin-right: 0.25rem;
+        color: #ef4444;
+      }
+    }
+  }
+}
+
+// 로딩 상태
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #6b7280;
+
+  .spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem;
+
+    .title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .chartWrapper {
+    padding: 0.5rem;
+
+    .svgContainer {
+      .chartSvg {
+        // 모바일에서는 더 작은 폰트
+        .chartGroup {
+          .xAxis,
+          .yAxis {
+            .tick text {
+              font-size: 10px;
+            }
+          }
+
+          .axisLabel {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .legend {
+    gap: 0.5rem;
+
+    .legendItem {
+      .legendText {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+// 다크모드 지원 (optional)
+@media (prefers-color-scheme: dark) {
+  .container {
+    .title {
+      color: #f9fafb;
+    }
+  }
+
+  .chartWrapper {
+    background-color: #1f2937;
+    border-color: #374151;
+
+    .svgContainer {
+      .chartSvg {
+        border-color: #4b5563;
+        background-color: #111827;
+
+        .chartGroup {
+          .xAxis,
+          .yAxis {
+            .domain {
+              stroke: #d1d5db;
+            }
+
+            .tick {
+              line {
+                stroke: #9ca3af;
+              }
+
+              text {
+                fill: #d1d5db;
+              }
+            }
+          }
+
+          .axisLabel {
+            fill: #d1d5db;
+          }
+
+          .gridLine {
+            stroke: #374151;
+          }
+        }
+      }
+    }
+  }
+
+  .legend {
+    .legendItem {
+      &:hover {
+        background-color: #374151;
+      }
+
+      .legendText {
+        color: #d1d5db;
+      }
+    }
+  }
+
+  .statusInfo {
+    color: #9ca3af;
+
+    .dataCount {
+      color: #34d399;
+    }
+  }
+}

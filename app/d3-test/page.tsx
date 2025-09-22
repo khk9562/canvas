@@ -1,10 +1,11 @@
 "use client"
-import { Button } from "react-bootstrap"
 import styles from "./page.module.css"
-import * as d3 from "d3"
-import useMakeBasicTest from "./hooks/useMakeBasicTest"
+import useMakeBasicTest from "@/hooks/d3/useMakeBasicTest"
 import { useRouter, usePathname } from "next/navigation"
-import useResizeObserver from "./hooks/useResizeObserver"
+import useResizeObserver from "@/hooks/d3/useResizeObserver"
+
+import { Button } from "react-bootstrap"
+import RealtimeChart from "@/components/D3/RealtimeChart"
 
 // d3 테스트 메인 페이지
 export default function D3TestPage() {
@@ -32,6 +33,10 @@ export default function D3TestPage() {
           // CHECK: viewbox도 처음 마운트시에 유동적으로 불러오기
           preserveAspectRatio='xMidYMid meet'
         />
+      </section>
+
+      <section>
+        <RealtimeChart width={1200} height={800} />
       </section>
     </article>
   )

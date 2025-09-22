@@ -8,7 +8,7 @@ import * as d3 from "d3"
 //   xScaleLabel,
 // } from "@/app/src/shared/convert.shared"
 import { xScaleLabel } from "./xScaleLabel"
-import { sampleProcessData } from "../constants/sampleData"
+import { sampleProcessData } from "../../../src/constants/d3/sampleData"
 // import FloatingMenu from "../components/FloatingMenu"
 // import Loading from "../Loading"
 import "./MultiLineChart.scss"
@@ -18,7 +18,7 @@ import type {
   TooltipData,
   MultiLineChartProps,
   Item,
-} from "../types/MultiLineChartTypes"
+} from "../../../src/types/d3/MultiLineChartTypes"
 
 /** 중복되는 라벨을 간단히 숨김 처리 */
 function hideOverlappingLabels(
